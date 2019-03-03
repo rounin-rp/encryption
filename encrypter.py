@@ -2,7 +2,7 @@
 """
 Created on Fri Feb 22 22:41:47 2019
 
-@author: LENOVO
+@author: DEXER
 """
 
 import key_generator as KN
