@@ -8,6 +8,8 @@ Created on Fri Feb 22 22:41:47 2019
 import key_generator as KN
 import key_decrypter as KD
 import decrypter as DC
+import random
+
 
 def Is_valid(key):
     flag1 = 0
@@ -50,6 +52,19 @@ def White_spaces(message):
         else:
             count = count + 1
     return spaces
+
+def Main_key(key1,key2):
+    main_key = str(key1)
+    for i in key2:
+        if(i>10):
+            ch = chr(random.randint(97,122))
+            main_key = main_key + ch + str(i) + ch
+        else:
+            main_key = main_key + str(i)
+    return main_key
+
+        
+    
 
 def Operation(message,key):
     lim = len(message)
@@ -111,9 +126,10 @@ if __name__ == '__main__':
             public_key = input('enter the key to encrypt the message : ')
             if(Is_valid(public_key)):
                 private_key = KD.Decrypt(public_key)
-                print('private key1 : {}'.format(private_key))
-                print('private key2 : {}'.format(private_key2))
                 encrypt = Encrypt(message,private_key)
+                private_key = Main_key(private_key,private_key2)
+                print('private key : {}'.format(private_key))
+                #print('private key2 : {}'.format(private_key2))
                 print('encrypted message : {}'.format(encrypt))
             else:
                 print('your provided key is not valid please try with different key')
@@ -122,17 +138,18 @@ if __name__ == '__main__':
             if(ans == 'y' or ans == 'Y' or ans == 'yes' or ans == 'Yes' or ans == 'Yes'):
                 private_key = KN.Private_key()
                 public_key  = KN.Public_key(private_key)
-                print('your public key is : {}'.format(public_key))
-                print('your private key1 is : {}'.format(private_key))
-                print('private key2 : {}'.format(private_key2))
                 encrypt = Encrypt(message,private_key)
+                print('your public key is : {}'.format(public_key))
+                private_key = Main_key(private_key,private_key2)
+                print('your private key is : {}'.format(private_key))
+                #print('private key2 : {}'.format(private_key2))
                 print('encrypted message : {}'.format(encrypt))
     elif(option == 2):
         message = input('enter the message to decrypt : ')
-        private_key = int(input('enter the key to decrypt : '))
-        if(DC.Is_true(private_key)):
+        private_key = input('enter the key to decrypt : ')
+        if(DC.Is_true(int(private_key[:4]))):
             dec = DC.Decrypt(message,private_key)
-            print('decrypted message is {}'.format(dec))
+            print('decrypted message is : {}'.format(dec))
         else:
             print('invalid key entered')
             

@@ -30,18 +30,40 @@ def Change(mess,key):
         if(ord(j) >= 97 and ord(j)<= 107):
             j = list1.index(j)
             j = str(j)
-        else:
+        elif(ord(j) >= 65 and ord(j) <= 90):
             j = int(ord(j) - key)
             if(j < 65):
                 j = j + 26
             j = chr(j)
+        else:
+            j = j
         dec = dec + j
     return dec
+
+def Divide_key(key):
+    per_key = 0 
+    for i in range(0,4):
+        per_key = per_key * 10 + int(key[i])
+    space_key = []
+    for i in range(4,len(key)):
+        if (ord(key[i]) >= 48 and ord(key[i]) <= 57):
+            space_key.append(int(key[i]))
+        elif(ord(key[i]) >= 97  and ord(key[i]) <= 122):
+            num = 0
+            while(True):
+                i = i + 1
+                if(ord(key[i]) >= 97 and ord(key[i]) <= 122):
+                    break
+                num = num * 10 + int(key[i])
+            space_key.append(num)
+    return per_key,space_key
+
     
 
-def Decrypt(message,key):
+def Decrypt(message,key1):
     half_message1 = ''
     half_message2 = ''
+    key,skey = Divide_key(key1)
     limit = len(message)
     key1 = int(key/1000)
     key2 = int((key%1000)/100)
@@ -63,15 +85,32 @@ def Decrypt(message,key):
     mess2 = Change(mess2,key2)
     mess3 = Change(mess3,key3)
     mess4 = Change(mess4,key1)
-    return(mess4+mess2+mess3+mess1)
+    sum_mess = mess4 + mess2 + mess3 + mess1
+    dmess = ''
+    j  = 0
+    k = 0
+    for i in sum_mess:
+        if j == skey[k]:
+            k = k + 1
+            dmess = dmess + ' '
+            dmess = dmess + i
+            j = 1
+        else :
+            dmess += i
+            j = j + 1
+    return dmess
+        
     
     
 
 if __name__ == '__main__':
     message = input('enter the message to decrypt : ')
-    key = int(input('enter the key :'))
+    key1 = input('enter the key :')
+    key = 0
+    for i in range(0,4):
+        key = key * 10 + int(key1[i])
     if(Is_true(key)):
-        decrypted = Decrypt(message,key)
+        decrypted = Decrypt(message,key1)
         print('decrypted message is : {}'.format(decrypted))
     else:
         print('invalid key entered')
