@@ -56,7 +56,7 @@ def White_spaces(message):
 def Main_key(key1,key2):
     main_key = str(key1)
     for i in key2:
-        if(i>10):
+        if(i>9):
             ch = chr(random.randint(97,122))
             main_key = main_key + ch + str(i) + ch
         else:
