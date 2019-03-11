@@ -41,22 +41,18 @@ def Change(mess,key):
     return dec
 
 def Divide_key(key):
-    per_key = 0 
-    for i in range(0,4):
-        per_key = per_key * 10 + int(key[i])
-    space_key = []
-    for i in range(4,len(key)):
-        if (ord(key[i]) >= 48 and ord(key[i]) <= 57):
-            space_key.append(int(key[i]))
-        elif(ord(key[i]) >= 97  and ord(key[i]) <= 122):
-            num = 0
-            while(True):
-                i = i + 1
-                if(ord(key[i]) >= 97 and ord(key[i]) <= 122):
-                    break
-                num = num * 10 + int(key[i])
-            space_key.append(num)
-    return per_key,space_key
+	list1 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+	per_key = 0 
+	for i in range(0,4):
+		per_key = per_key * 10 + int(key[i])
+	space_key = []
+	for i in range(4,len(key)):
+		if (ord(key[i]) >= 48 and ord(key[i]) <= 57):
+			space_key.append(int(key[i]))
+		elif(ord(key[i]) >= 97  and ord(key[i]) <= 122):
+			num = 0
+			space_key.append(list1.index(key[i]) + 10)
+	return per_key,space_key
 
     
 

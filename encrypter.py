@@ -2,7 +2,7 @@
 """
 Created on Fri Feb 22 22:41:47 2019
 
-@author: LENOVO
+@author: DEXER
 """
 
 import key_generator as KN
@@ -54,14 +54,15 @@ def White_spaces(message):
     return spaces
 
 def Main_key(key1,key2):
-    main_key = str(key1)
-    for i in key2:
-        if(i>10):
-            ch = chr(random.randint(97,122))
-            main_key = main_key + ch + str(i) + ch
-        else:
-            main_key = main_key + str(i)
-    return main_key
+	list1 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+	main_key = str(key1)
+	for i in key2:
+		if(i>9):
+			#ch = chr(random.randint(97,122))
+			main_key = main_key + list1[i-10]
+		else:
+			main_key = main_key + str(i)
+	return main_key
 
         
     
